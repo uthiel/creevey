@@ -647,7 +647,7 @@ scheduledTimerWithTimeInterval:timerIntvl
 	}
 	if (keyIsRepeating) return; // don't bother precaching if we're fast-forwarding anyway
 
-	if (self.isMainWindow && !imgView.dragMode)
+	if (self.isMainWindow)
 		[NSCursor setHiddenUntilMouseMoves:YES];
 
 	BOOL fullSize = imgView.showActualSize;

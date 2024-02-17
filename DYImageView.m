@@ -588,7 +588,7 @@
 	// sets hand or arrow, depending
 	if (self.dragMode) {
 		[NSCursor.openHandCursor set];
-		[NSCursor setHiddenUntilMouseMoves:NO]; // NOT unhide
+//		[NSCursor setHiddenUntilMouseMoves:NO]; // NOT unhide
 	} else {
 		[NSCursor.arrowCursor set];
 	}
