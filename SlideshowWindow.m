@@ -843,8 +843,6 @@ scheduledTimerWithTimeInterval:timerIntvl
 			case ' ': // only allow shift-space to go back
 				if ((e.modifierFlags & NSEventModifierFlagShift) == 0) return;
 				// fallthrough
-//			case NSLeftArrowFunctionKey:
-//			case NSUpArrowFunctionKey:
 			case ',':
 			case NSHomeFunctionKey:
 			case NSEndFunctionKey:
@@ -1022,6 +1020,9 @@ scheduledTimerWithTimeInterval:timerIntvl
 			//	[zooms removeObjectForKey:[filenames objectAtIndex:currentIndex]];
 			//[self updateInfoFld];
 			[self redisplayImage]; // this resets zoom, rotate, and flip
+			break;
+		case 'p':
+			imgView.pauseAnimation	= !imgView.pauseAnimation;
 			break;
 		default:
 			//NSLog(@"%x",c);

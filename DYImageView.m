@@ -148,12 +148,12 @@
 	id rep = image.representations[0];
 	if ([rep isKindOfClass:[NSBitmapImageRep class]]
 		&& [rep valueForProperty:NSImageFrameCount]) {
-		if (!gifTimer || gifTimer.userInfo != image) {
+		if (!self.pauseAnimation && (!gifTimer || gifTimer.userInfo != image)) {
 			float frameDuration = [[rep valueForProperty:NSImageCurrentFrameDuration] floatValue];
 			gifTimer = [NSTimer scheduledTimerWithTimeInterval:frameDuration
 														target:self selector:@selector(animateGIF:)
 													  userInfo:image repeats:NO];
-			gifTimer.tolerance = frameDuration*0.15;
+//			gifTimer.tolerance = frameDuration*0.15;
 		}
 	}
 }
@@ -161,6 +161,7 @@
 - (void)animateGIF:(NSTimer *)t {
 	gifTimer = nil;
 	if (image != t.userInfo) return; // stop if image is changed
+	if (self.pauseAnimation) return;
 	
 	NSBitmapImageRep *rep = (NSBitmapImageRep *)[t.userInfo representations][0];
 	NSNumber *frameCount = [rep valueForProperty:NSImageFrameCount];
@@ -168,6 +169,16 @@
 	if (++n == frameCount.intValue) n = 0;
 	[rep setProperty:NSImageCurrentFrame withValue:@(n)];
 	[self setNeedsDisplay:YES];
+}
+
+- (void)setPauseAnimation:(BOOL)pauseAnimation {
+	_pauseAnimation	= pauseAnimation;
+	if (pauseAnimation) {
+		[gifTimer invalidate];
+		gifTimer	= nil;
+	} else {
+		[self setNeedsDisplay:YES];
+	}
 }
 
 - (void)setWebpImageSource:(id)src {

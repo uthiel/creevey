@@ -32,6 +32,7 @@ typedef NS_ENUM(char, DYImageViewZoomMode) {
 @property (nonatomic) BOOL showActualSize;
 @property (nonatomic, getter=isImageFlipped) BOOL imageFlipped;
 @property (nonatomic, readonly) float zoomF;
+@property (nonatomic) BOOL pauseAnimation;
 
 - (void)setImage:(NSImage *)anImage zooming:(DYImageViewZoomMode)zoomMode;
 - (int)addRotation:(int)r;
