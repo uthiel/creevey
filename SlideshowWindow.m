@@ -235,7 +235,7 @@ static BOOL UsingMagicMouse(NSEvent *e) {
 
 - (void)configureScreen // or rather, configure the window *for* the screen
 {
-	if (_fullscreenMode) {
+	if (_fullscreenMode && !(self.styleMask & NSWindowStyleMaskFullScreen)) {
 		[self toggleFullScreen:nil];
 	}
 }
