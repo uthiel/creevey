@@ -808,10 +808,12 @@ scheduledTimerWithTimeInterval:timerIntvl
 		keyIsRepeating = 0;
 		switch ([e.characters characterAtIndex:0]) {
 			case ' ':
-			case NSRightArrowFunctionKey:
-			case NSDownArrowFunctionKey:
-			case NSLeftArrowFunctionKey:
-			case NSUpArrowFunctionKey:
+//			case NSRightArrowFunctionKey:
+//			case NSDownArrowFunctionKey:
+//			case NSLeftArrowFunctionKey:
+//			case NSUpArrowFunctionKey:
+			case ',':
+			case '.':
 			case NSPageUpFunctionKey:
 			case NSPageDownFunctionKey:
 				[self displayImage];
@@ -841,8 +843,9 @@ scheduledTimerWithTimeInterval:timerIntvl
 			case ' ': // only allow shift-space to go back
 				if ((e.modifierFlags & NSEventModifierFlagShift) == 0) return;
 				// fallthrough
-			case NSLeftArrowFunctionKey:
-			case NSUpArrowFunctionKey:
+//			case NSLeftArrowFunctionKey:
+//			case NSUpArrowFunctionKey:
+			case ',':
 			case NSHomeFunctionKey:
 			case NSEndFunctionKey:
 			case NSPageUpFunctionKey:
@@ -890,10 +893,22 @@ scheduledTimerWithTimeInterval:timerIntvl
 		keyIsRepeating++;
 	}
 	if (c == ' ' && ((e.modifierFlags & NSEventModifierFlagShift) != 0)) {
-		c = NSLeftArrowFunctionKey;
+		c = ',';
 	}
 	DYImageInfo *obj;
 	switch (c) {
+		case NSLeftArrowFunctionKey:
+			[imgView fakeDragX:32 y:0];
+			break;
+		case NSRightArrowFunctionKey:
+			[imgView fakeDragX:-32 y:0];
+			break;
+		case NSUpArrowFunctionKey:
+			[imgView fakeDragX:0 y:-32];
+			break;
+		case NSDownArrowFunctionKey:
+			[imgView fakeDragX:0 y:32];
+			break;
 		case '!':
 			[self setTimer:0.5];
 			break;
@@ -906,15 +921,18 @@ scheduledTimerWithTimeInterval:timerIntvl
 				[self pauseTimer];
 				break; // pause slideshow only
 			}
-			// otherwise advance
-		case NSRightArrowFunctionKey:
-		case NSDownArrowFunctionKey:
-			// hold down option to go to the next non-randomized slide
-			[self jump:1 ordered:(e.modifierFlags & NSEventModifierFlagOption) != 0];
+			// else advance
+		case '.':
+			[self jump:1 ordered:NO];
 			break;
-		case NSLeftArrowFunctionKey:
-		case NSUpArrowFunctionKey:
-			[self jump:-1 ordered:(e.modifierFlags & NSEventModifierFlagOption) != 0];
+		case u'≥':
+			[self jump:1 ordered:YES];
+			break;
+		case ',':
+			[self jump:-1 ordered:NO];
+			break;
+		case u'≤':
+			[self jump:-1 ordered:YES];
 			break;
 		case NSHomeFunctionKey:
 			[self jump:-currentIndex]; // <0 stops auto-advance
