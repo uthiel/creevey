@@ -85,7 +85,7 @@ static BOOL UsingMagicMouse(NSEvent *e) {
 
 - (instancetype)initWithContentRect:(NSRect)r styleMask:(NSWindowStyleMask)m backing:(NSBackingStoreType)b defer:(BOOL)d {
 	// full screen window, force it to be NSBorderlessWindowMask
-	if (self = [super initWithContentRect:r styleMask:NSWindowStyleMaskBorderless backing:b defer:d]) {
+	if (self = [super initWithContentRect:r styleMask:m backing:b defer:d]) {
 		filenames = [[DYRandomizableArray alloc] init];
 		rotations = [[NSMutableDictionary alloc] init];
 		flips = [[NSMutableDictionary alloc] init];
@@ -98,7 +98,6 @@ static BOOL UsingMagicMouse(NSEvent *e) {
  		self.backgroundColor = NSColor.blackColor;
 		self.opaque = NO;
 		_fullscreenMode = YES; // set this to prevent autosaving the frame from the nib
-		self.collectionBehavior = NSWindowCollectionBehaviorParticipatesInCycle|NSWindowCollectionBehaviorFullScreenNone|NSWindowCollectionBehaviorMoveToActiveSpace;
 		// *** Unfortunately the menubar doesn't seem to show up on the second screen... Eventually we'll want to switch to use NSView's enterFullScreenMode:withOptions:
 		currentIndex = NSNotFound;
    }
@@ -160,13 +159,6 @@ static BOOL UsingMagicMouse(NSEvent *e) {
 
 - (void)setFullscreenMode:(BOOL)b {
 	_fullscreenMode = b;
-	if (b) {
-		self.styleMask = NSWindowStyleMaskBorderless;
-		self.collectionBehavior = NSWindowCollectionBehaviorParticipatesInCycle|NSWindowCollectionBehaviorFullScreenNone|NSWindowCollectionBehaviorMoveToActiveSpace;
-	} else {
-		self.styleMask = NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskResizable;
-		self.collectionBehavior = NSWindowCollectionBehaviorParticipatesInCycle|NSWindowCollectionBehaviorFullScreenNone|NSWindowCollectionBehaviorMoveToActiveSpace;
-	}
 	if (self.visible)
 		[self configureScreen];
 }
@@ -243,29 +235,8 @@ static BOOL UsingMagicMouse(NSEvent *e) {
 
 - (void)configureScreen // or rather, configure the window *for* the screen
 {
-	NSScreen *myScreen = self.visible ? self.screen : NSScreen.mainScreen;
-	NSRect screenRect = myScreen.frame;
 	if (_fullscreenMode) {
-		NSRect boundingRect = screenRect;
-		if (@available(macOS 12.0, *))
-			boundingRect.size.height -= myScreen.safeAreaInsets.top;
-		[self setFrame:screenRect display:NO];
-		boundingRect.origin = imgView.frame.origin;
-		imgView.frame = boundingRect;
-	} else {
-		NSString *v = [NSUserDefaults.standardUserDefaults objectForKey:@"DYSlideshowWindowFrame"];
-		NSRect r;
-		if (v) {
-			r = NSRectFromString(v);
-		} else {
-			// if no saved frame, put it in the top left of the screen
-			r = screenRect;
-			r.size.width = r.size.width/2;
-			r.size.height = r.size.height/2;
-			r.origin.y = screenRect.size.height;
-		}
-		[self setFrame:r display:NO];
-		imgView.frame = self.contentLayoutRect;
+		[self toggleFullScreen:nil];
 	}
 }
 
@@ -316,8 +287,6 @@ static BOOL UsingMagicMouse(NSEvent *e) {
 
 - (void)orderOut:(id)sender {
 	[self cleanUp];
-	if (!_fullscreenMode)
-		[NSUserDefaults.standardUserDefaults setObject:NSStringFromRect(self.frame) forKey:@"DYSlideshowWindowFrame"];
 	[super orderOut:sender];
 }
 
@@ -365,27 +334,6 @@ static BOOL UsingMagicMouse(NSEvent *e) {
 
 	// ordering front seems to reset the cursor, so force it again
 	[imgView setCursor];
-}
-
-- (void)becomeMainWindow { // need this when switching apps
-	if (_fullscreenMode)
-		NSApp.presentationOptions = NSApplicationPresentationHideDock|NSApplicationPresentationAutoHideMenuBar;
-	[super becomeMainWindow];
-}
-
-- (void)resignMainWindow {
-	if (_fullscreenMode)
-		NSApp.presentationOptions = NSApplicationPresentationDefault;
-	[super resignMainWindow];
-}
-
-- (NSRect)constrainFrameRect:(NSRect)frameRect toScreen:(NSScreen *)screen
-{
-	// As of 10.15.1(?) when the menubar hides, the window will get moved up by the height of the menubar.
-	// This should be the correct fix for that.
-	if (_fullscreenMode)
-		return [super constrainFrameRect:self.screen.frame toScreen:screen];
-	return [super constrainFrameRect:frameRect toScreen:screen];
 }
 
 - (void)watcherFiles:(NSArray *)files deleted:(NSArray *)deleted {
@@ -808,10 +756,6 @@ scheduledTimerWithTimeInterval:timerIntvl
 		keyIsRepeating = 0;
 		switch ([e.characters characterAtIndex:0]) {
 			case ' ':
-//			case NSRightArrowFunctionKey:
-//			case NSDownArrowFunctionKey:
-//			case NSLeftArrowFunctionKey:
-//			case NSUpArrowFunctionKey:
 			case ',':
 			case '.':
 			case NSPageUpFunctionKey:

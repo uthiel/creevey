@@ -445,7 +445,7 @@ Gw
             </connections>
         </customObject>
         <window title="Slideshow Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="210" userLabel="Slideshow" customClass="SlideshowWindow">
-            <windowStyleMask key="styleMask" titled="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="206" y="269" width="343" height="210"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="898"/>
@@ -475,7 +475,7 @@ Gw
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="194" id="Iag-qm-od0"/>
                         </constraints>
                     </progressIndicator>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="458">
+                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="458">
                         <rect key="frame" x="18" y="59" width="198" height="16"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Processing files..." id="835">
                             <font key="font" metaFont="system"/>
@@ -522,7 +522,7 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="358" height="438"/>
                         <clipView key="contentView" drawsBackground="NO" id="LdZ-X5-XdY">
                             <rect key="frame" x="1" y="1" width="356" height="436"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" usesRuler="YES" smartInsertDelete="YES" id="484">
                                     <rect key="frame" x="0.0" y="0.0" width="356" height="436"/>
@@ -577,7 +577,7 @@ Gw
                             <action selector="toggleExifThumbnail:" target="207" id="643"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="3" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="641">
+                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="3" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="641">
                         <rect key="frame" x="145" y="502" width="68" height="32"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" tag="3" placeholderString="no EXIF thumbnail" id="841">
                             <font key="font" metaFont="system"/>
