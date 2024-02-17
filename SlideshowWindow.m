@@ -1024,6 +1024,12 @@ scheduledTimerWithTimeInterval:timerIntvl
 		case 'p':
 			imgView.pauseAnimation	= !imgView.pauseAnimation;
 			break;
+		case '[':
+			[imgView minusAnimation];
+			break;
+		case ']':
+			[imgView plusAnimation];
+			break;
 		default:
 			//NSLog(@"%x",c);
 			[super keyDown:e];

@@ -162,11 +162,20 @@
 	gifTimer = nil;
 	if (image != t.userInfo) return; // stop if image is changed
 	if (self.pauseAnimation) return;
-	
-	NSBitmapImageRep *rep = (NSBitmapImageRep *)[t.userInfo representations][0];
+
+	[self animationDelta:1];
+}
+
+- (void)animationDelta:(int)delta {
+//	NSBitmapImageRep *rep = (NSBitmapImageRep *)[t.userInfo representations][0];
+	NSBitmapImageRep *rep = (NSBitmapImageRep *)[image representations][0];
 	NSNumber *frameCount = [rep valueForProperty:NSImageFrameCount];
 	int n = [[rep valueForProperty:NSImageCurrentFrame] intValue];
-	if (++n == frameCount.intValue) n = 0;
+	n += delta;
+	if (n == frameCount.intValue)
+		n = 0;
+	if (n < 0 )
+		n = frameCount.intValue - 1;
 	[rep setProperty:NSImageCurrentFrame withValue:@(n)];
 	[self setNeedsDisplay:YES];
 }
@@ -178,6 +187,17 @@
 		gifTimer	= nil;
 	} else {
 		[self setNeedsDisplay:YES];
+	}
+}
+
+- (void)plusAnimation {
+	if (self.pauseAnimation) {
+		[self animationDelta:1];
+	}
+}
+- (void)minusAnimation {
+	if (self.pauseAnimation) {
+		[self animationDelta:-1];
 	}
 }
 

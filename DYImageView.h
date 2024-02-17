@@ -43,6 +43,8 @@ typedef NS_ENUM(char, DYImageViewZoomMode) {
 - (void)zoomOut;
 - (void)setZoomF:(float)f;
 - (void)fakeDragX:(float)x y:(float)y;
+- (void)plusAnimation;
+- (void)minusAnimation;
 
 @property (nonatomic, readonly) BOOL zoomMode;
 @property (nonatomic, readonly) BOOL zoomInfoNeedsSaving;
