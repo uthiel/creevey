@@ -135,7 +135,7 @@ NSMutableAttributedString* Fileinfo2EXIFString(NSString *origPath, DYImageCache 
 		@"appearance": @0,
 		@"thumbCellWidth": @120.0f,
 		@"getInfoVisible": @NO,
-		@"autoVersCheck": @YES,
+		@"autoVersCheck": @NO,
 		@"jpegPreserveModDate": @NO,
 		@"slideshowAutoadvance": @NO,
 		@"slideshowAutoadvanceTime": @5.5f,

@@ -516,7 +516,7 @@
 
 - (void)scrollWheel:(NSEvent *)e {
 	if (self.dragMode)
-		[self fakeDragX:e.deltaX*128 y:-e.deltaY*128];
+		[self fakeDragX:e.deltaX*8 y:-e.deltaY*8];
 	else
 		[super scrollWheel:e];
 }

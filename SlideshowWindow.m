@@ -987,9 +987,9 @@ scheduledTimerWithTimeInterval:timerIntvl
 				if (obj.image == imgView.image
 					&& !NSEqualSizes(obj->pixelSize, obj.image.size)) { // cached image smaller than orig
 					[imgView setImage:[obj loadFullSizeImage]
-							  zooming:c == '=' ? DYImageViewZoomModeActualSize : c == '+' ? DYImageViewZoomModeZoomIn : DYImageViewZoomModeZoomOut];
+							  zooming:c == '+' ? DYImageViewZoomModeActualSize : c == '=' ? DYImageViewZoomModeZoomIn : DYImageViewZoomModeZoomOut];
 				} else {
-					if (c == '+') [imgView zoomIn];
+					if (c == '=') [imgView zoomIn];
 					else if (c == '-') [imgView zoomOut];
 					else [imgView zoomActualSize];
 				}
@@ -1018,11 +1018,11 @@ scheduledTimerWithTimeInterval:timerIntvl
 	// charactersIgnoringModifiers is 10.4 or later, and doesn't play well with Dvorak Qwerty-cmd
 	DYImageInfo *obj;
 	switch (c) {
-		case '=':
-			if (!(e.modifierFlags & NSEventModifierFlagNumericPad))
-				c = '+';
-			// intentional fall-through
 		case '+':
+			if (!(e.modifierFlags & NSEventModifierFlagNumericPad))
+				c = '=';
+			// intentional fall-through
+		case '=':
 		case '-':
 			if (currentIndex >= filenames.count) { NSBeep(); return YES; }
 			// ** code copied from keyDown
@@ -1030,9 +1030,9 @@ scheduledTimerWithTimeInterval:timerIntvl
 				if (obj.image == imgView.image
 					&& !NSEqualSizes(obj->pixelSize, obj.image.size)) {  // cached image smaller than orig
 					[imgView setImage:[obj loadFullSizeImage]
-							  zooming:c == '=' ? DYImageViewZoomModeActualSize : c == '+' ? DYImageViewZoomModeZoomIn : DYImageViewZoomModeZoomOut];
+							  zooming:c == '+' ? DYImageViewZoomModeActualSize : c == '=' ? DYImageViewZoomModeZoomIn : DYImageViewZoomModeZoomOut];
 				} else {
-					if (c == '+') [imgView zoomIn];
+					if (c == '=') [imgView zoomIn];
 					else if (c == '-') [imgView zoomOut];
 					else [imgView zoomActualSize];
 				}

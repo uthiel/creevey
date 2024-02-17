@@ -448,7 +448,7 @@ Gw
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="206" y="269" width="343" height="210"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="898"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="211">
                 <rect key="frame" x="0.0" y="0.0" width="343" height="210"/>
@@ -457,12 +457,13 @@ Gw
             <connections>
                 <outlet property="delegate" destination="207" id="536"/>
             </connections>
+            <point key="canvasLocation" x="-292" y="857"/>
         </window>
         <window title="Transforming JPEG..." allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="455" userLabel="Progress Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="276" y="215" width="234" height="123"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="898"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" misplaced="YES" id="456">
                 <rect key="frame" x="0.0" y="0.0" width="234" height="123"/>
@@ -474,7 +475,7 @@ Gw
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="194" id="Iag-qm-od0"/>
                         </constraints>
                     </progressIndicator>
-                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="458">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="458">
                         <rect key="frame" x="18" y="59" width="198" height="16"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Processing files..." id="835">
                             <font key="font" metaFont="system"/>
@@ -505,12 +506,13 @@ Gw
                     <constraint firstAttribute="trailing" secondItem="460" secondAttribute="trailing" constant="20" symbolic="YES" id="dHe-x0-Is1"/>
                 </constraints>
             </view>
+            <point key="canvasLocation" x="140" y="144"/>
         </window>
         <window title="Image Info" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="ImageInfoLoc" animationBehavior="default" id="481" userLabel="Info Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES" utility="YES" nonactivatingPanel="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="854" y="304" width="358" height="618"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="898"/>
             <value key="minSize" type="size" width="237" height="200"/>
             <view key="contentView" id="482">
                 <rect key="frame" x="0.0" y="0.0" width="358" height="618"/>
@@ -520,7 +522,7 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="358" height="438"/>
                         <clipView key="contentView" drawsBackground="NO" id="LdZ-X5-XdY">
                             <rect key="frame" x="1" y="1" width="356" height="436"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" usesRuler="YES" smartInsertDelete="YES" id="484">
                                     <rect key="frame" x="0.0" y="0.0" width="356" height="436"/>
@@ -575,7 +577,7 @@ Gw
                             <action selector="toggleExifThumbnail:" target="207" id="643"/>
                         </connections>
                     </button>
-                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="3" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="641">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="3" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="641">
                         <rect key="frame" x="145" y="502" width="68" height="32"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" tag="3" placeholderString="no EXIF thumbnail" id="841">
                             <font key="font" metaFont="system"/>
@@ -636,6 +638,7 @@ Gw
                     <constraint firstAttribute="trailing" secondItem="537" secondAttribute="trailing" constant="5" id="xDL-6L-bho"/>
                 </constraints>
             </view>
+            <point key="canvasLocation" x="140" y="611"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="551" userLabel="Shared Defaults"/>
         <menu title="Menu" id="650" userLabel="ExifThumbMenu">
