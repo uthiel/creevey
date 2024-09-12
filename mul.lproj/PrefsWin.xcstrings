@@ -531,7 +531,7 @@
     },
     "732.title" : {
       "comment" : "Class = \"NSMenu\"; title = \"OtherViews\"; ObjectID = \"732\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1665,7 +1665,7 @@
     },
     "I1V-Fz-GHo.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"I1V-Fz-GHo\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1875,7 +1875,7 @@
     },
     "pTa-e0-6zR.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"pTa-e0-6zR\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

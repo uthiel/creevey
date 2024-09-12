@@ -171,7 +171,7 @@
     },
     "29.title" : {
       "comment" : "Class = \"NSMenu\"; title = \"MainMenu\"; ObjectID = \"29\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3141,7 +3141,7 @@
     },
     "673.title" : {
       "comment" : "Class = \"NSMenu\"; title = \"OtherViews\"; ObjectID = \"673\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3225,7 +3225,7 @@
     },
     "675.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Item2\"; ObjectID = \"675\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3267,7 +3267,7 @@
     },
     "676.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Item3\"; ObjectID = \"676\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

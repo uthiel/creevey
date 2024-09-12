@@ -411,6 +411,8 @@
 	}
 }
 
+#define __zoomFactor 1.1f
+
 - (void)zoomIn {
 	if (zoomF == 0) {
 		[self setImage:image zooming:DYImageViewZoomModeZoomIn];
@@ -420,14 +422,7 @@
 		NSBeep();
 		return;
 	}
-	float oldF = zoomF;
-	float p = 2*log2f(zoomF);
-	int n = (int)floorf(p);
-	float f;
-	do {
-		n++;
-		f = n%2 ? ldexpf(1.5,(n-1)/2) : ldexpf(1,n/2);
-	} while (f <= oldF);
+	float f = zoomF * __zoomFactor;
 	[self setZoomF:f];
 }
 
@@ -498,13 +493,7 @@
 		NSBeep();
 		return;
 	}
-	float oldF = zoomF;
-	float p = 2*log2f(zoomF);
-	int n = (int)ceilf(p);
-	do {
-		n--;
-		zoomF = n%2 ? ldexpf(1.5,(n-1)/2) : ldexpf(1,n/2);
-	} while (zoomF >= oldF);
+	zoomF = zoomF / __zoomFactor;
 	[self setZoomAndCenter:NO];
 }
 
