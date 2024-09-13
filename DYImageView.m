@@ -235,6 +235,8 @@
 	[self setNeedsDisplay:YES];
 }
 
+#define __zoomFactor 1.1f
+
 - (void)setImage:(NSImage *)anImage zooming:(DYImageViewZoomMode)zoomMode {
 	if (anImage != image) {
 		if (!anImage) return; 
@@ -249,22 +251,14 @@
 	}
 	if (zoomMode == DYImageViewZoomModeActualSize) {
 		zoomF = 1;
+	}
+
+	float f = [self zoomForFit];
+
+	if (zoomMode == DYImageViewZoomModeZoomIn) {
+		zoomF = f * __zoomFactor;
 	} else {
-		float f = [self zoomForFit];
-		float p = 2*log2f(f);
-		if (zoomMode == DYImageViewZoomModeZoomIn) {
-			int n = floorf(p); // find closest half-power of 2
-			do { // in case we're off slightly, keep increasing until we find the right value
-				n++;
-				zoomF = n%2 ? ldexpf(1.5,(n-1)/2) : ldexpf(1,n/2);
-			} while (zoomF <= f);
-		} else {
-			int n = ceilf(p);
-			do {
-				n--;
-				zoomF = n%2 ? ldexpf(1.5,(n-1)/2) : ldexpf(1,n/2);
-			} while (zoomF >= f);
-		}
+		zoomF = f / __zoomFactor;
 	}
 	[self setZoomAndCenter:YES];
 }
@@ -410,8 +404,6 @@
 		[self setZoomAndCenter:NO];
 	}
 }
-
-#define __zoomFactor 1.1f
 
 - (void)zoomIn {
 	if (zoomF == 0) {
