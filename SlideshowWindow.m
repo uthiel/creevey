@@ -205,28 +205,16 @@ static BOOL UsingMagicMouse(NSEvent *e) {
 }
 
 - (void)loadFilenamesFromPath:(NSString *)s fullScreen:(BOOL)fullScreen wantsSubfolders:(BOOL)b comparator:(NSComparator)block sortOrder:(short int)sortOrder {
-	static dispatch_queue_t _loadQueue;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		_loadQueue = dispatch_queue_create("phoenixslides.slideshow.load", NULL);
-	});
 	self.fullscreenMode = fullScreen;
 	[self configureScreen];
 	currentIndex = NSNotFound;
 	imgView.image = nil;
 	infoFld.hidden = NO;
-	dispatch_async(dispatch_get_main_queue(), ^{
-		[self makeKeyAndOrderFront:nil];
-	});
+	[self makeKeyAndOrderFront:nil];
 	self.comparator = block;
 	_sortType = abs(sortOrder);
 	_stopLoading = YES;
-	static _Atomic uint64_t blockTime;
-	uint64_t timeStamp = blockTime = mach_absolute_time();
-	dispatch_async(_loadQueue, ^{
-		if (timeStamp == blockTime)
-			[self loadImages:s subfolders:b];
-	});
+	[self loadImages:s subfolders:b];
 }
 
 - (NSString *)currentShortFilename {

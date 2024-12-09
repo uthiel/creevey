@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -448,7 +448,7 @@ Gw
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="206" y="269" width="343" height="210"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="898"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1440"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="211">
                 <rect key="frame" x="0.0" y="0.0" width="343" height="210"/>
@@ -463,7 +463,7 @@ Gw
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="276" y="215" width="234" height="123"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="898"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1440"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" misplaced="YES" id="456">
                 <rect key="frame" x="0.0" y="0.0" width="234" height="123"/>
@@ -512,7 +512,7 @@ Gw
             <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES" utility="YES" nonactivatingPanel="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="854" y="304" width="358" height="618"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="898"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1440"/>
             <value key="minSize" type="size" width="237" height="200"/>
             <view key="contentView" id="482">
                 <rect key="frame" x="0.0" y="0.0" width="358" height="618"/>
@@ -522,7 +522,7 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="358" height="438"/>
                         <clipView key="contentView" drawsBackground="NO" id="LdZ-X5-XdY">
                             <rect key="frame" x="1" y="1" width="356" height="436"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" usesRuler="YES" smartInsertDelete="YES" id="484">
                                     <rect key="frame" x="0.0" y="0.0" width="356" height="436"/>
@@ -600,7 +600,7 @@ Gw
                         <rect key="frame" x="284" y="504" width="73" height="25"/>
                         <popUpButtonCell key="cell" type="push" title="✎" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" pullsDown="YES" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="674" id="842">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
+                            <font key="font" metaFont="message"/>
                             <menu key="menu" title="OtherViews" id="673">
                                 <items>
                                     <menuItem title="✎" hidden="YES" id="674"/>
