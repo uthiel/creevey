@@ -14,6 +14,7 @@
 #import "DYRandomizableArray.h"
 #import "DYFileWatcher.h"
 #import "NSMutableArray+DYMovable.h"
+#import <sys/xattr.h>
 
 static BOOL UsingMagicMouse(NSEvent *e) {
 	return e.phase != NSEventPhaseNone || e.momentumPhase != NSEventPhaseNone;
@@ -514,6 +515,7 @@ scheduledTimerWithTimeInterval:timerIntvl
 	if (currentIndex == NSNotFound) return;
 	NSString *theFile = filenames[currentIndex];
 	[zooms removeObjectForKey:theFile]; // don't forget to reset the zoom/rotation!
+	[self resetZoomInfo];
 	[rotations removeObjectForKey:theFile];
 	[flips removeObjectForKey:theFile];
 	[self displayImage];
@@ -545,7 +547,7 @@ scheduledTimerWithTimeInterval:timerIntvl
 	[self displayCats];
 	if (img) {
 		NSNumber *rot = rotations[theFile];
-		DYImageViewZoomInfo *zoomInfo = zooms[theFile];
+		DYImageViewZoomInfo *zoomInfo = [self loadZoomInfo];
 		int r = rot ? rot.intValue : 0;
 		BOOL imgFlipped = [flips[theFile] boolValue];
 		
@@ -688,10 +690,70 @@ scheduledTimerWithTimeInterval:timerIntvl
 	[self displayImage];
 }
 
+- (void)saveObject:(id)obj toXattr:(NSString *)attr {
+	NSError *error;
+	NSData *data;
+	const char *attrName	= [[NSBundle.mainBundle.bundleIdentifier stringByAppendingPathExtension:attr] UTF8String];
+	NSString *fname			= filenames[currentIndex];
+	const char *filePath	= fname.fileSystemRepresentation;
+
+	if (obj) {
+		data			= [NSKeyedArchiver archivedDataWithRootObject:obj requiringSecureCoding:YES error:&error];
+	} else {
+		data			= nil;
+	}
+	int result				= setxattr(filePath, attrName, data.bytes, data.length, 0, 0);
+//	NSLog(@"%i: '%@': %@ → %@ / %@ (%@)", result, fname, attr, data, obj, error);
+}
+
+- (nullable id)getObjectFromXattr:(NSString *)attr  {
+	const char *attrName	= [[NSBundle.mainBundle.bundleIdentifier stringByAppendingPathExtension:attr] UTF8String];
+	NSString *fname			= filenames[currentIndex];
+	const char *filePath	= fname.fileSystemRepresentation;
+	
+	// get size of needed buffer
+	ssize_t bufferLength	= getxattr(filePath, attrName, NULL, 0, 0, 0);
+	char *buffer			= (char *) malloc(bufferLength);
+
+	// get the actual attribute data
+	if (getxattr(filePath, attrName, buffer, bufferLength, 0, 0) == -1) { // getxattr failed
+//		NSLog(@"'%@': failed to get attribute '%@'", fname, attr);
+		free(buffer);
+		return nil;
+	}
+	else {
+		NSMutableData *data	= [NSMutableData dataWithLength:bufferLength];
+		memcpy(data.mutableBytes, buffer, bufferLength);
+		free(buffer);
+		NSError *error;
+		id object	= [NSKeyedUnarchiver unarchivedObjectOfClass:DYImageViewZoomInfo.class fromData:data error:&error];
+//		NSLog(@"'%@': %@ = %@ / %@ (%@)", fname, attr, data, object, error);
+		return object;
+	}
+}
+
+static NSString * const xattr_zoom	= @"zoom";
+
+- (nullable DYImageViewZoomInfo *)loadZoomInfo {
+	NSString *theFile			= filenames[currentIndex];
+	DYImageViewZoomInfo *zinfo	= zooms[theFile];
+	
+	if (!zinfo) {
+		zinfo	= [self getObjectFromXattr:xattr_zoom];
+	}
+	return zinfo;
+}
+
 - (void)saveZoomInfo {
 	if (currentIndex >= filenames.count) return;
-	if (imgView.zoomInfoNeedsSaving)
+	if (imgView.zoomInfoNeedsSaving) {
 		zooms[filenames[currentIndex]] = imgView.zoomInfo;
+		[self saveObject:imgView.zoomInfo toXattr:xattr_zoom];
+	}
+}
+
+- (void)resetZoomInfo {
+	[self saveObject:nil toXattr:xattr_zoom];
 }
 
 - (void)setRotation:(int)n {

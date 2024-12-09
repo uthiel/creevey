@@ -10,6 +10,23 @@
 #import "DYImageView.h"
 
 @implementation DYImageViewZoomInfo
+//MARK: NSSecureCoding
++ (BOOL)supportsSecureCoding { return YES;}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+	self		= [self init];
+	sourceRect	= [aDecoder decodeRectForKey:@"sourceRect"];
+	destSize	= [aDecoder decodeSizeForKey:@"destSize"];
+	zoomF		= [aDecoder decodeFloatForKey:@"zoomF"];
+	
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+	[aCoder encodeRect:sourceRect	forKey:@"sourceRect"];
+	[aCoder encodeSize:destSize		forKey:@"destSize"];
+	[aCoder encodeFloat:zoomF		forKey:@"zoomF"];
+}
 @end
 
 

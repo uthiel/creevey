@@ -9,7 +9,7 @@
 
 @import Cocoa;
 
-@interface DYImageViewZoomInfo : NSObject {
+@interface DYImageViewZoomInfo : NSObject <NSSecureCoding> {
 	@public
 	NSRect sourceRect;
 	NSSize destSize;
