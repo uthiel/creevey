@@ -61,7 +61,7 @@ static BOOL UsingMagicMouse(NSEvent *e) {
 	NSImageView *loopImageView;
 	
 	BOOL loopMode, randomMode;
-	unsigned char keyIsRepeating;
+//	unsigned char keyIsRepeating;
 	
 	BOOL mouseDragged;
 
@@ -79,9 +79,9 @@ static BOOL UsingMagicMouse(NSEvent *e) {
 	[NSUserDefaults.standardUserDefaults registerDefaults:@{@"DYSlideshowWindowVisibleFields": @0}];
 }
 
-#define MAX_CACHED 15
+#define MAX_CACHED 1500
 // MAX_CACHED must be bigger than the number of items you plan to have cached!
-#define MAX_REPEATING_CACHED 6
+//#define MAX_REPEATING_CACHED 6
 // when key is held down, max to cache before skipping over
 
 - (instancetype)initWithContentRect:(NSRect)r styleMask:(NSWindowStyleMask)m backing:(NSBackingStoreType)b defer:(BOOL)d {
@@ -583,7 +583,7 @@ scheduledTimerWithTimeInterval:timerIntvl
 		[infoFld sizeToFit];
 		return;
 	}
-	if (keyIsRepeating) return; // don't bother precaching if we're fast-forwarding anyway
+//	if (keyIsRepeating) return; // don't bother precaching if we're fast-forwarding anyway
 
 	if (self.isMainWindow)
 		[NSCursor setHiddenUntilMouseMoves:YES];
@@ -801,22 +801,22 @@ static NSString * const xattr_zoom	= @"zoom";
 
 #pragma mark event stuff
 // Here's the bulk of our user interface, all keypresses
-- (void)keyUp:(NSEvent *)e {
-	if (keyIsRepeating) {
-		keyIsRepeating = 0;
-		switch ([e.characters characterAtIndex:0]) {
-			case ' ':
-			case ',':
-			case '.':
-			case NSPageUpFunctionKey:
-			case NSPageDownFunctionKey:
-				[self displayImage];
-				break;
-			default:
-				break;
-		}
-	}
-}
+//- (void)keyUp:(NSEvent *)e {
+//	if (keyIsRepeating) {
+//		keyIsRepeating = 0;
+//		switch ([e.characters characterAtIndex:0]) {
+//			case ' ':
+//			case ',':
+//			case '.':
+//			case NSPageUpFunctionKey:
+//			case NSPageDownFunctionKey:
+//				[self displayImage];
+//				break;
+//			default:
+//				break;
+//		}
+//	}
+//}
 - (void)keyDown:(NSEvent *)e {
 	if (e.characters.length == 0) return; // avoid exception on deadkeys
 	unichar c = [e.characters characterAtIndex:0];
@@ -881,9 +881,9 @@ static NSString * const xattr_zoom	= @"zoom";
 		//NSLog(@"got cat %i", c - NSF1FunctionKey + 1);
 		return;
 	}
-	if (e.ARepeat && keyIsRepeating < MAX_REPEATING_CACHED) {
-		keyIsRepeating++;
-	}
+//	if (e.ARepeat) {//} && keyIsRepeating < MAX_REPEATING_CACHED) {
+//		keyIsRepeating++;
+//	}
 	if (c == ' ' && ((e.modifierFlags & NSEventModifierFlagShift) != 0)) {
 		c = ',';
 	}
@@ -1147,17 +1147,17 @@ static NSString * const xattr_zoom	= @"zoom";
 	NSImage *img = [imgCache imageForKeyInvalidatingCacheIfNecessary:s];
 	if (img)
 		return img;
-	if (keyIsRepeating < MAX_REPEATING_CACHED || currentIndex == 0 || currentIndex == filenames.count-1) {
+//	if (keyIsRepeating < MAX_REPEATING_CACHED || currentIndex == 0 || currentIndex == filenames.count-1) {
 		BOOL fullSize = imgView.showActualSize;
-		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
+//		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
 			@autoreleasepool {
-				if (currentIndex == NSNotFound) return; // in case slideshow ended before thread started (i.e., don't bother caching if the slideshow is over already)
+				//if (currentIndex == NSNotFound) return; // in case slideshow ended before thread started (i.e., don't bother caching if the slideshow is over already)
 				[imgCache cacheFile:s fullSize:fullSize]; // this operation takes time...
 				if (currentIndex < filenames.count && [filenames[currentIndex] isEqualToString:s])
 					[self performSelectorOnMainThread:@selector(displayImage) withObject:nil waitUntilDone:NO];
 			}
-		});
-	}
+//		});
+//	}
 	return nil;
 }
 
