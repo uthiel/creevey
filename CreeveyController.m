@@ -488,7 +488,13 @@ NSMutableAttributedString* Fileinfo2EXIFString(NSString *origPath, DYImageCache 
 	NSString *curr = slidesWindow.isMainWindow ? slidesWindow.basePath : frontWindow.path;
 	if ([dest isEqual:[NSURL fileURLWithPath:curr]]) return;
 
-	NSArray *files = slidesWindow.isMainWindow ? @[slidesWindow.currentFile] : frontWindow.currentSelection;
+	NSArray *files;
+	if (slidesWindow.isMainWindow) {
+		files = @[slidesWindow.currentFile];
+		[slidesWindow saveZoomInfo];
+	} else {
+		files = frontWindow.currentSelection;
+	}
 	NSMutableArray<NSString*> *paths = [NSMutableArray array];
 	NSMutableArray<NSURL*> *moved = [NSMutableArray arrayWithCapacity:files.count];
 	NSMutableArray<NSString*> *notMoved = [NSMutableArray array];

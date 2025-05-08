@@ -1005,7 +1005,7 @@ static NSString * const xattr_zoom	= @"zoom";
 				}
 				[self updateInfoFld];
 			}
-			// can't save zooms here, save when leaving the pict; see jumpTo
+			// UT: can't save zooms here, save when leaving the pict; see jumpTo
 			// for important comments
 			break;
 		case '*':

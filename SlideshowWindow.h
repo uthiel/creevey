@@ -40,6 +40,8 @@
 @property (nonatomic) NSTimeInterval autoadvanceTime;
 - (void)updateTimer;
 
+- (void)saveZoomInfo;
+
 // menu methods
 - (IBAction)endSlideshow:(id)sender;
 - (IBAction)toggleLoopMode:(id)sender;
