@@ -49,6 +49,9 @@ NSDirectoryEnumerator *CreeveyEnumerator(NSString *path, BOOL recurseSubfolders)
 - (IBAction)doShowFilenames:(id)sender;
 - (IBAction)doAutoRotateDisplayedImage:(id)sender;
 
+- (IBAction)setEditor:(id)sender;
+- (IBAction)editSelectedFIle:(id)sender;
+
 - (void)slideshowFromAppOpen:(NSArray *)files;
 
 // prefs stuff

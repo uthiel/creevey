@@ -105,6 +105,21 @@
                             <menuItem isSeparatorItem="YES" id="79">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
+                            <menuItem title="Set Editor..." tag="1" id="Wsj-bk-bX5">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="setEditor:" target="207" id="VJo-4z-9ei"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Edit..." tag="1" keyEquivalent="e" id="HZC-ic-zy6">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                <connections>
+                                    <action selector="editSelectedFIle:" target="207" id="Jzc-D5-3ye"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Xd8-U7-1eG">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
                             <menuItem title="Reveal In Finder" tag="1" keyEquivalent="r" id="341">
                                 <connections>
                                     <action selector="revealSelectedFilesInFinder:" target="207" id="344"/>
@@ -475,7 +490,7 @@ Gw
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="194" id="Iag-qm-od0"/>
                         </constraints>
                     </progressIndicator>
-                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="458">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="458">
                         <rect key="frame" x="18" y="59" width="198" height="16"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Processing files..." id="835">
                             <font key="font" metaFont="system"/>
@@ -577,7 +592,7 @@ Gw
                             <action selector="toggleExifThumbnail:" target="207" id="643"/>
                         </connections>
                     </button>
-                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="3" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="641">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="3" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="641">
                         <rect key="frame" x="145" y="502" width="68" height="32"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" tag="3" placeholderString="no EXIF thumbnail" id="841">
                             <font key="font" metaFont="system"/>

@@ -17,6 +17,8 @@
 #import "DYVersChecker.h"
 #import "DYExiftags.h"
 
+@import UniformTypeIdentifiers;
+
 // The thumbs cache should always store images using the resolved filename as the key.
 // This prevents duplication somewhat, but it means when you look things up
 // you need to make a call to ResolveAliasToPath.
@@ -338,6 +340,31 @@ NSMutableAttributedString* Fileinfo2EXIFString(NSString *origPath, DYImageCache 
 		} else {
 			[NSWorkspace.sharedWorkspace openFile:frontWindow.path];
 		}
+	}
+}
+
+static NSString * const _userDefEditor	= @"editor";
+
+- (void)setEditor:(id)sender {
+	NSOpenPanel *op				= NSOpenPanel.openPanel;
+	op.prompt					= @"Use as Editor";
+	op.allowedContentTypes		= @[UTTypeApplication];
+	op.allowsOtherFileTypes		= NO;
+	op.directoryURL				= [NSFileManager.defaultManager URLsForDirectory:NSApplicationDirectory inDomains:NSSystemDomainMask].firstObject;
+	
+	if (op.runModal == NSModalResponseOK) {
+		NSString *app	= op.URL.lastPathComponent;
+		NSLog(@"Using as Editor: %@", app);
+		[NSUserDefaults.standardUserDefaults setObject:app forKey:_userDefEditor];
+	}
+
+}
+
+- (void)editSelectedFIle:(id)sender {
+	if (slidesWindow.isMainWindow && slidesWindow.currentFile) {
+		NSString *app= [NSUserDefaults.standardUserDefaults stringForKey:_userDefEditor];
+		NSLog(@"Opening '%@' with '%@'", slidesWindow.currentFile, app);
+		[NSWorkspace.sharedWorkspace openFile:slidesWindow.currentFile withApplication:app];
 	}
 }
 

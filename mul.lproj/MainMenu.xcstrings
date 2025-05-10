@@ -3931,6 +3931,18 @@
         }
       }
     },
+    "HZC-ic-zy6.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"Edit...\"; ObjectID = \"HZC-ic-zy6\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Edit..."
+          }
+        }
+      }
+    },
     "k8u-wZ-vhF.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"New Tab\"; ObjectID = \"k8u-wZ-vhF\";",
       "extractionState" : "extracted_with_value",
@@ -4011,6 +4023,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "搬移⋯⋯"
+          }
+        }
+      }
+    },
+    "Wsj-bk-bX5.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"Set Editor...\"; ObjectID = \"Wsj-bk-bX5\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set Editor..."
           }
         }
       }
